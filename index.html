@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Asciinema/Explainshell Mashup</title>
+        <title>ShellSouffleur - Explain Shell Commands used in Recordings</title>
         <link rel="stylesheet" type="text/css" href="js/asciinema-player.css" />
         <script src="js/asciinema-player.js"></script>
 
@@ -83,6 +83,10 @@
                 }
                 if (playedSecs === 16){
                     window.frames["explainshell"].src = "https://explainshell.com/explain?cmd=sudo du -a /var/ | sort -n -r | head -n 20";
+                }
+
+                if (playedSecs === 22){
+                    window.frames["explainshell"].src = "https://explainshell.com/explain?cmd=exit";
                 }
             }
 
