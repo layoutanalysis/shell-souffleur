@@ -19,6 +19,17 @@
                 border: 0;
             }
 
+            .footer {
+                position: absolute;
+                bottom: 0;
+                margin-bottom: 20px;
+                left:0;
+                right:0;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+            }
+
             .container {
                 width: 40%;
                 margin-top: 200px;
@@ -58,6 +69,9 @@
 
         </style>
         <script>
+            //the asciinemaPlayer -> explainshell.com synchronisation is currently smoke-and-mirrors (hardcoded timeouts)
+            //TODO: figure out a way to detect when a command is submitted
+
             function updateExplanation(currentTime){
                 var playedSecs = Math.floor(currentTime/1000);
                 console.log(currentTime);
@@ -70,13 +84,7 @@
             }
 
 
-            /*window.setTimeout(function(){
-            
-            },5000);
 
-            window.setTimeout(function(){
-             
-            },10000);*/
 
             var timer;
 
@@ -113,7 +121,7 @@
                  
             </p>
         </div>
-        <!--<script id="asciicast-224190" src="https://asciinema.org/a/224190.js" async></script>-->
+
         <div id="asciinema-container" class="container">
                 <h2>Recording</h2>
                 <asciinema-player id="player" src="casts/diskspace_2_fixed.js" start-at="22" font-size="13px" autoplay></asciinema-player>
@@ -126,4 +134,5 @@
              </div>
         </div>
     </body>
+    <div class="footer"><small>A 2019 PoC by Franz Buchinger</small></div>
 </html>
