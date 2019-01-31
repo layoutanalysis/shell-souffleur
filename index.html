@@ -75,10 +75,13 @@
             function updateExplanation(currentTime){
                 var playedSecs = Math.floor(currentTime/1000);
                 console.log(currentTime);
-                if (playedSecs === 5){
+                if (playedSecs < 5){
+                    window.frames["explainshell"].src = "";
+                }
+                if (playedSecs === 10){
                     window.frames["explainshell"].src = "https://explainshell.com/explain?cmd=sudo+find+%2Fvar+-type+f+-printf+%22%25s%5Ct%25p%5Cn%22+%7C+sort+-n+%7C+tail+-l";
                 }
-                if (playedSecs === 12){
+                if (playedSecs === 16){
                     window.frames["explainshell"].src = "https://explainshell.com/explain?cmd=sudo du -a /var/ | sort -n -r | head -n 20";
                 }
             }
@@ -124,7 +127,7 @@
 
         <div id="asciinema-container" class="container">
                 <h2>Recording</h2>
-                <asciinema-player id="player" src="casts/diskspace_2_fixed.js" start-at="22" font-size="13px" autoplay></asciinema-player>
+                <asciinema-player id="player" src="casts/diskspace_3.js" font-size="13px" autoplay></asciinema-player>
         </div>
       
         <div id="explainshell-container" class="container">
