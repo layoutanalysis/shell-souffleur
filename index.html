@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <title>Asciinema/Explainshell Mashup</title>
+        <link rel="stylesheet" type="text/css" href="js/asciinema-player.css" />
+        <script src="js/asciinema-player.js"></script>
+
+        <style>
+            body {
+                background-color: black;
+                color: white;
+                font-family: Consolas;
+            }
+
+            a{
+                color: white;
+            }
+
+            iframe {
+                border: 0;
+            }
+
+            .container {
+                width: 40%;
+                margin-top: 200px;
+                margin-bottom:0px;
+                bottom:0px;
+                /*border: 1px solid white;*/
+                float:left;
+                height: auto;
+                bottom: 0;
+                top: 0;
+                position: absolute;
+            }
+
+            #explainshell {
+                width: 90%;
+                height: 43em;
+                margin-top: -160px;
+                overflow: hidden;
+            }
+            #explainshell-container {
+                /*background-color: #fff;*/
+                left: 41%;
+            }
+
+            #explainshell-container {
+                width: 59%;
+                height: auto;
+                overflow: hidden;
+                position: absolute;
+            }
+
+             .explainshell-wrapper {
+                height: 40em;
+                margin-top: 22px;
+                overflow: hidden;
+             }
+
+        </style>
+        <script>
+            function updateExplanation(currentTime){
+                var playedSecs = Math.floor(currentTime/1000);
+                console.log(currentTime);
+                if (playedSecs === 5){
+                    window.frames["explainshell"].src = "https://explainshell.com/explain?cmd=sudo+find+%2Fvar+-type+f+-printf+%22%25s%5Ct%25p%5Cn%22+%7C+sort+-n+%7C+tail+-l";
+                }
+                if (playedSecs === 12){
+                    window.frames["explainshell"].src = "https://explainshell.com/explain?cmd=sudo du -a /var/ | sort -n -r | head -n 20";
+                }
+            }
+
+
+            /*window.setTimeout(function(){
+            
+            },5000);
+
+            window.setTimeout(function(){
+             
+            },10000);*/
+
+            var timer;
+
+            window.onload = function (){
+                var asciiPlayer = document.getElementById('player');
+                asciiPlayer.addEventListener('play', function(e) {
+                    var startTime = this.currentTime;
+                    var start = new Date();
+                    timer = setInterval(function(){ 
+                        var now = new Date();
+                        updateExplanation(startTime + (now - start));
+                    },1000);
+                });
+
+                asciiPlayer.addEventListener('pause', function(e) {
+                    if (timer){
+                        clearInterval(timer);
+                    }
+                });
+
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div class="explainer">
+            <h1>Shell Souffleur - a Nano-Innovation</h1>
+            <p>You are a DevOps engineer in training and the shell troubleshooting sessions with your colleagues leave you completely clueless? <br />You have a hard time to remember the syntax and meaning of various shell commands?
+               Shell Souffleur comes to your rescue! <br />It is so easy:
+               <ol>
+                   <li> Just convince your colleagues to record their sessions with the super-comfy <a href="https://asciinema.org">Asciinema</a>   </li>
+                   <li> Throw the .cast file into Shell Souffleur and let us explain every command using the wisdom of <a href="http://explainshell.com">ExplainShell</a>  </li>
+               </ol>
+                 
+            </p>
+        </div>
+        <!--<script id="asciicast-224190" src="https://asciinema.org/a/224190.js" async></script>-->
+        <div id="asciinema-container" class="container">
+                <h2>Recording</h2>
+                <asciinema-player id="player" src="/casts/diskspace_2_fixed.cast" start-at="22" font-size="13px" autoplay></asciinema-player>
+        </div>
+      
+        <div id="explainshell-container" class="container">
+            <h2>Explanation of last command</h2>
+            <div class="explainshell-wrapper">
+                <iframe id="explainshell"></iframe>
+             </div>
+        </div>
+    </body>
+</html>
